@@ -1,0 +1,490 @@
+{
+	"info": {
+		"_postman_id": "8feb4047-29df-4cd9-9f34-789cb72273e8",
+		"name": "book-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17404374",
+		"_collection_link": "https://library-8561.postman.co/workspace/backend-challenge-pt-synapsis~7bc3d3dc-9d60-4b67-8bb0-f0e0979077f4/collection/17404374-8feb4047-29df-4cd9-9f34-789cb72273e8?action=share&source=collection_link&creator=17404374"
+	},
+	"item": [
+		{
+			"name": "UpdateBook",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Golang for Beginners 2\",\r\n  \"publishYear\": 2023,\r\n  \"stock\": 10,\r\n  \"authorIds\": [12],\r\n  \"categoryIds\": [13]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCALHOST}}/books/1",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBook",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Buku Baru\",\r\n  \"isbn\": \"978-1-23456-789-000-56\",\r\n  \"publishYear\": 2023,\r\n  \"stock\": 10,\r\n  \"authorIds\": [1],\r\n  \"categoryIds\": [1]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCALHOST}}/books",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IncreaseStock",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"amount\": 5\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCALHOST}}/books/increase-stock",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"increase-stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DecreaseStock",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"amount\": 10\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCALHOST}}/books/decrease-stock",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"decrease-stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllBooks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCALHOST}}/books?page=1&limit=10",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBookByID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCALHOST}}/books/18",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteBook",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{LOCALHOST}}/books/1",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BorrowBook",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"bookId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCALHOST}}/books/borrowings",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"borrowings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListBorrowings",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"bookId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCALHOST}}/books/borrowings",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"borrowings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReturnBook",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"bookId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCALHOST}}/books/borrowings/1/return",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"borrowings",
+						"1",
+						"return"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateRecommendation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"bookId\": 1,\r\n    \"reason\": \"buku adalah jendela dunia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCALHOST}}/books/recommendations",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"recommendations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecommendationByID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCALHOST}}/books/recommendations/1",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"recommendations",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllRecommendations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCALHOST}}/books/recommendations",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"recommendations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRecommendation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{LOCALHOST}}/books/recommendations/1",
+					"host": [
+						"{{LOCALHOST}}"
+					],
+					"path": [
+						"books",
+						"recommendations",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

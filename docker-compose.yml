@@ -1,0 +1,160 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    depends_on:
+      - auth_service
+      - author_service
+      - book_service
+      - category_service
+    ports:
+      - "80:80"
+    networks:
+      - microservice_network
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
+  auth_service:
+    build: ./auth-service
+    working_dir: /app
+    container_name: auth_service
+    depends_on:
+      - auth_db
+      - book_service
+    ports:
+      - "8080:8080"
+    networks:
+      - microservice_network
+    restart: always
+    # volumes:
+    #   - .:/app
+
+  auth_db:
+    image: postgres:15
+    container_name: auth_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: auth_db
+    ports:
+      - "5432:5432"
+    networks:
+      - microservice_network
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
+
+  author_service:
+    build: ./author-service
+    working_dir: /app
+    container_name: author_service
+    depends_on:
+      - author_db
+      - book_service
+    ports:
+      - "8081:8080"
+    networks:
+      - microservice_network
+    restart: always    
+    # volumes:
+    #   - .:/app
+
+  author_db:
+    image: postgres:15
+    container_name: author_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: author_db
+    ports:
+      - "5433:5432"
+    networks:
+      - microservice_network
+    volumes:
+      - author_db_data:/var/lib/postgresql/data
+
+  book_service:
+    build: ./book-service
+    working_dir: /app
+    container_name: book_service
+    depends_on:
+      - book_db
+      - redis
+    ports:
+      - "8083:8080"
+      - "50051:50051"
+    networks:
+      - microservice_network
+    restart: always
+    # volumes:
+    #   - .:/app
+
+  book_db:
+    image: postgres:15
+    container_name: book_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: book_db
+    ports:
+      - "5434:5432"
+    networks:
+      - microservice_network
+    volumes:
+      - book_db_data:/var/lib/postgresql/data
+
+  category_service:
+    build: ./category-service
+    working_dir: /app
+    container_name: category_service
+    depends_on:
+      - category_db
+      - book_service
+    ports:
+      - "8084:8080"
+    networks:
+      - microservice_network
+    restart: always
+    # volumes:
+    #   - .:/app
+
+  category_db:
+    image: postgres:15
+    container_name: category_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: category_db
+    ports:
+      - "5435:5432"
+    networks:
+      - microservice_network
+    volumes:
+      - category_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6378:6379"
+    networks:
+      - microservice_network
+    environment:
+      - REDIS_PASSWORD=redisdev
+    command: ["redis-server", "--requirepass", "redisdev"]
+      
+networks:
+  microservice_network:
+    driver: bridge
+
+volumes:
+  auth_db_data:
+  author_db_data:
+  book_db_data:
+  category_db_data:
